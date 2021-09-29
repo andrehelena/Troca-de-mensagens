@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{01DA08D7-CCE6-4090-BCD2-AA0C76BECEAA}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Gestor.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Subordinado.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Gestor">
+        <MSBuild Projects="Gestor.dproj"/>
+    </Target>
+    <Target Name="Gestor:Clean">
+        <MSBuild Projects="Gestor.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Gestor:Make">
+        <MSBuild Projects="Gestor.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Subordinado">
+        <MSBuild Projects="Subordinado.dproj"/>
+    </Target>
+    <Target Name="Subordinado:Clean">
+        <MSBuild Projects="Subordinado.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Subordinado:Make">
+        <MSBuild Projects="Subordinado.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Gestor;Subordinado"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Gestor:Clean;Subordinado:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Gestor:Make;Subordinado:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
